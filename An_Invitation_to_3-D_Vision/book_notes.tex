@@ -23,11 +23,39 @@
 \chapter{Representation of a Three-Dimensional Moving Scene}
 
 In this chapter, we focus on the first fundamental set of transformations central to the geometry of 3D-vision: \textit{Euclidean motion}, or \textit{rigid-body motion}.
-This is pretty important for modeling how a camera moves.
+This is pretty important for modeling how a camera moves, and describing general motion in 3D space.
+You may imagine how this is pretty important for robotics in general, as robots are often moving around in 3D space and we may want to model that, so its a good idea to have a grasp on rigid-body motion!
 We will start by going into what a Euclidean space is and then spend the rest of the time talking about rigid-body motions.
 
 \section{Three-dimensional Euclidean space}
-We are going to use $\mathbb{E}^3$ to denote three-dimensional Euclidean space.
+A Euclidean space is almost like a vector space, except it doesn't contain vectors outright.
+Instead, a Euclidean space is a set of real points, all forming an affine space over the reals.
+We are going to use $\mathbb{E}^n$ to denote the $n$-dimensional Euclidean space, and thus $\mathbb{E}^3$ to denote the three-dimensional Euclidean space which we will restrict our focus to for the rest of this chapter.
+A point $p \in \mathbb{E}^3$ corrosponds to a vector $\mathbf{X} \in \mathbb{R}^3$.
+\begin{equation*}
+    \mathbf{X} \dot{=}
+    \begin{bmatrix}
+        X_1 \\
+        X_2 \\
+        X_3 \\
+    \end{bmatrix}
+    = 
+    \begin{bmatrix}
+        X \\
+        Y \\
+        Z \\
+    \end{bmatrix}
+\end{equation*}
+The $\mathbb{R}^3$ vector corrosponding to an $\mathbb{E}^3$ point can be called its coordinates.
+Every point in $\mathbb{E}^3$ has unique coordinates in $\mathbb{R}^3$ and vice versa, forming a bijection!\\
+The notion of points is important for defining what it means to have a vector in $\mathbb{E}^3$.
+
+\theoremstyle{definition}
+\begin{definition}[Vector]
+    A vector $v$ in $\mathbb{E}^3$ is determined by a pair of points $p,q \in \mathbb{E}^3$ as a directed arrow $v = \vec{pq}$ connecting the two points.
+\end{definition}
+
+
 
 \section{Rigid-body motion}
 

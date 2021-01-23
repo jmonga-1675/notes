@@ -1,0 +1,147 @@
+\documentclass{report}
+\usepackage[T1]{fontenc}
+\usepackage{jaytex}
+\renewcommand\chaptername{Lecture}
+
+\begin{document}
+\title{Notes on \textit{Math H113: Abstract Algebra} lectures by Professor Edward Frenkel, Spring 2021}
+\author{Jay Monga}
+\date{\today}
+\maketitle
+
+\tableofcontents
+
+\chapter{Introduction}
+Welcome to Math H113: Honors Abstract Algebra!
+As opposed to Math 113: Abstract Algbra, H113 will proceed at a faster pace and cover more material.
+As a result, some material like the details of a proof or definition will be covered just enough to pique our curiousity but rich coverage left aside for independent study.
+In these notes, I will try to fill in some gaps of the coverage, and we'll see how this goes.
+
+\section{First Look at Sets}
+We start by providing a definition of algebra, the focus of this class.
+
+\theoremstyle{definition}
+\begin{definition}
+    \textbf{Algebra} is the study of sets with operations satisfying certain axioms.
+\end{definition}
+
+But what even is a set?
+We can think of a set as just a colection of items.
+The idea seems simple enough, but leaving it this simple can cause us problems later down the road, as we will see.
+For now, we will leave it as that.
+We can see how the set is one of the basic building blocks of mathematics, and we can start to explore some interesting behavior that comes from defining special structure and operations on elements of a set.
+This leads to our discussion of groups.
+
+\section{Groups}
+Groups are the fundamental set in this class.
+\theoremstyle{definition}
+\begin{definition}
+A \textbf{group} is the set of symmetries for a given object.
+\end{definition}
+Consider a circle.
+We can define a group for this object by the set of all rotations of that circle by an angle modulo 2 $\pi$. 
+\begin{figure}
+    \caption{Insert circle diagram here}
+\end{figure}
+Notice that applying two rotations is the same as applying the composition of the rotations, the 0 degree rotation composes with a rotation to produce the same rotation, and every rotation has an inverse rotation that will reset it to the 0 degree rotation.
+These three properties are what makes the set of all 2D rotations $SO(2)$ a group. \\
+Let's now formalize our definition of a group
+
+\theoremstyle{definition}
+\begin{definition}
+A \textbf{group} is the set $G$ with an operation satisfying axioms of
+\begin{enumerate}
+    \item $\forall x, y z \in G, x \cdot (y \cdot g) = (x \cdot y) \cdot g \text{ (Associativity)}$
+    \item $\exists e \in G \text{ s.t. } e \cdot g = g \cdot e = g, \forall g \in G \text{ (Identity element)}$
+    \item $\forall g \in G, \exists g' \text{ s.t. } g \cdot g' = g' \cdot g = e \text{ (Inverse element)}$
+\end{enumerate}
+\end{definition}
+
+Now we can go through some examples!
+We already introduced $SO(2)$, which Prof. Frenkel brings up in the beginning of \textit{Love and Math}, but there are other cool examples as well.
+
+\subsection{Galois Group}
+First, let's introduce the concept of a field.
+\theoremstyle{definition}
+\begin{definition}
+A \textbf{field} is a set defined with two binary addition and multiplication operations that satisfy a set of axioms.
+\end{definition}
+We will go more in detail later; these axioms are similar to the axioms of a vector space.
+Common fields include $\mathbb{Q}, \mathbb{R}, \mathbb{C}$. \\
+The Galois group can be seen as extending a field into a set of symmetries.\\
+The Galois group is named after its discoverer \href{https://en.wikipedia.org/wiki/%C3%89variste_Galois}{Évariste Galois} who tragically died in a duel at a young age.
+One interesting application of his work was for determining existence of solutions in terms of a radical for polynomials with degree greater than or equal to 5.
+This problem was significantly studied by the great mathematician \href{https://en.wikipedia.org/wiki/Muhammad_ibn_Musa_al-Khwarizmi}{Muhammad ibn Mūsā al-Khwārizmī} 1000 years before Galois's time.\\
+The word algorithm is derived from al-Khwārizmī and algebra, the topic of this class, comes from a book he wrote called al-jabr.
+
+\subsection{Braid Group}
+
+\section{Algebra vs Analysis}
+
+\section{Paradoxes}
+
+\chapter{Set Theory}
+\section{Recap}
+Last lecture, we talked about
+\begin{itemize}
+    \item Notion of a set
+    \item Russel Paradox ($R = \{x|x \notin x\}$)
+    \item $ZFC$ axioms to solve carelessness in definition of a set that lead to logical inconsistencies like Russel Paradox
+    \item It's hard to precisely define a set is, so to some extent we have to take some faith in that we understand them to be some agreeable object
+\end{itemize}
+As always, use Wikipedia or nLab to look up things you are interested in.
+
+\section{Sets Continued}
+As before, we look at sets as a collection of objects. Let's look at types of sets
+\begin{itemize}
+    \item empty set: this is a unique set with no items denoted by $\emptyset$
+    \item finite sets: sets with a finitely many elements
+    \item functions: a specific type of relation between two sets, but can be seen as a set itself
+    \item subset: a set that is a collection of some elements of another set (the integers are a subset of the real numbers)
+\end{itemize}
+
+\theoremstyle{definition}
+\begin{definition}
+    Suppose $A$ and $B$ are two sets. A \textbf{function} $f: A \rightarrow B$ is a rule that assigns to every every element $a \in A$ an element (one and only one) of B, denoted $f(a)$
+\end{definition}
+\begin{definition}
+    A function $f: A \rightarrow B$ has \textbf{domain} $A$ and \textbf{codomain} $B$
+\end{definition}
+\subsection{Functions}
+Functions are pretty important to us, so we will dive deeper into them.
+\begin{example}
+    In single-variable calculus, we consider functions $f: \mathbb{R} \rightarrow \mathbb{R}$
+\end{example}
+\begin{example}
+    Consider $A = \{a, b, c\}, B = \{x, y, z, w\}, f:A \rightarrow B$
+    \begin{itemize}
+        \item A valid $f$ would be
+        \begin{itemize}
+            \item $f(a) = x$
+            \item $f(b) = y$
+            \item $f(c) = z$
+        \end{itemize}
+        \item An invalid $f$ would \begin{enumerate}
+            \item $f(a) = x$
+            \item $f(b) = y$
+            \item $f(c) = z$
+            \item $f(c) = w$
+        \end{enumerate}
+        since we see that $c$ is getting mapped to two different elements $z, w$.
+    \end{itemize}
+    Function properties to be familiar with
+    \begin{itemize}
+        \item injective, or one-to-one
+        \item surjective, or onto
+        \item bijective, one-to-one and onto
+        \item uniquness of inverse (prove through some algebra looking at $g' \circ f \circ g $)
+    \end{itemize}
+    Remember to read function composition from right to left, ie applying $f$ first and then $g$ is written as $g \circ f$.
+\end{example}
+\section{Cardinality}
+With a notion of functions and their properties, we can start talking about set sizes.
+\begin{definition}
+    A set $A$ is \textbf{finite} if there exists a bijection with 
+\end{definition}
+
+\end{document}

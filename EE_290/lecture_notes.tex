@@ -1,0 +1,102 @@
+\documentclass{report}
+\usepackage[T1]{fontenc}
+\usepackage{jaytex}
+\renewcommand\chaptername{Lecture}
+
+\begin{document}
+\title{Notes on \textit{EE 290-005: Integrated Perception, Learning, and Control} lectures by Professors Yi Ma, Jitendra Malik, Shankar Sastry, and Claire Tomlin, Spring 2021}
+\author{Jay Monga}
+\date{Last updated \today}
+\maketitle
+
+\tableofcontents
+
+\chapter{Introduction}
+Welcome to EE 290, which can be seen as an advanced robotics course.
+The faculty has a diverse set of specializations which cover the main themes of the course: perception, planning and control.
+This is the first time the course is being offered, so it's going to be a fun ride.
+\paragraph{Goal:} Study the integrated roles of perception, learning, and control in a closed-loop for autonomous robotic systems, under various levels of modeling uncertainty for the environment and of resource constraint for the agent.\\
+Many robotics curriculums focus on small parts instead of the integration of perception, learning, and control systems, so this course will focus on the whole, closed-loop autonomous systems.\\
+
+\section{Closed-Loop Autonomous System}
+
+\paragraph{Model Uncertainty:}
+\begin{itemize}
+    \item deterministic
+    \item stochastic
+\end{itemize}
+
+\paragraph{Resources:} Are we a private researcher at Google or a poor professor at Berkeley?
+\begin{itemize}
+    \item cost
+    \item hardware
+\end{itemize}
+
+\section{Presentation and Project Suggestions}
+We don't want paper presentations to be a waste of your and our time. Presentations should be engaging and educatiational. Make sure to cover
+\begin{itemize}
+    \item Problem formulation and assumptions (what is actually being solved? how is uncertainty modeled?)
+    \item Justification for the proposed method (why not optimal control, learning, etc.)
+    \item Generalizability in the proposed solution (is the solution general? or was a special case solved? how well?)
+    \item Data and computational resourses needed (how easily can these methods be applied? are the results practical?)
+\end{itemize}
+
+In a similar manner, keep these tips in mind to get the most out of your projects.
+\begin{itemize}
+    \item Don't stay "cocooned" in your own specific field (ex. I only like vision). This class is about integration.
+    \item Keep physical-world implementation in mind; this makes the work practical.
+    \item Again, integration. Try to combine model-based and data-driven approaches.
+    \item Think out-of-the box to create projects that really capture interest and imagination.
+\end{itemize}
+
+\section{History of Robotics}
+Prof. Sastry likes to always start off with a history of robotics. 
+\begin{itemize}
+    \item "it's important to know whoose shoulders you are standing on"
+    \item Prosthetics was one of the earliest examples of robotics
+    \item Mechatronics became more advanced and even programmable.
+    \item Development of cars and planes provided lots of advancement
+    \item Term "ROBOT" coined in by Karel Capek called "RUR"
+    \item Nyquist, Bode, and Turing driving lots of fundamental theory
+    \item Norbert Wiener did foundational work on cybernetics
+    \item Rudolf Kalman did fundamental work on controls
+    \item Early telemanipulation work done at Argonne national lab
+\end{itemize}
+
+\section{Integrated Perception and Control}
+Prof. Malik likes to start out with evolutionary biology and how developed our sensors, acuators, and CPUs.
+\begin{itemize}
+    \item Animals developed sight and movement around the same time
+    \begin{itemize}
+        \item "Gibson: We see in order to move, and we move in order to see"
+    \end{itemize}
+    \item Once we got locomotion down, we started to develop hands
+    \item Use of hands to make tools correlated with growth of intelect
+    \item While vision sensors today are as good as and better than our eyes, nothing really matches our hands yet
+    \item Evolutionary progression came in order of vision and locomotion, manipulation, and then language.
+    \begin{itemize}
+        \item Success in AI seems to also come in this order
+    \end{itemize}
+    \item Prof. Malik has special intrest in general purpose robots that can work in homes
+\end{itemize}
+
+One field of locomition that has been studied a lot is gaits. Boston Dynamics has developed robots that can emulate animal gates very well, although more complex gaits in real life are left to be effectively realized. In essence, gaits do not encompass all forms of legged locomotion.
+
+\paragraph{Coupled Perception and Action}
+Vision allows a way for a robot to have enough knowledge of its environment to in theory plan robust motion.\\
+
+Visual landmarks are quite useful for planning in an environment.
+One classical approach is SLAM - develop a complete map, and then plan in it.
+However, it may better to utilize visual landmarks rather doing full scene reconstruction. \\
+
+"Instead of trying to produce a programme to simulate the adult mind, why not try to simulate the child?" - Turing
+
+\paragraph{Six Lessons} What we learned about learning by observing people
+\begin{itemize}
+    \item 
+\end{itemize}
+
+Vision can help us learn from actions and develop a environment model and policy. We also want to incorporate perception in the control loop (Prof. Tomlin's work).
+
+
+\end{document}

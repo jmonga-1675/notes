@@ -1,0 +1,129 @@
+\documentclass{report}
+\usepackage[T1]{fontenc}
+\usepackage{jaytex}
+\renewcommand\chaptername{Lecture}
+
+\begin{document}
+\title{Notes on \textit{EE 219A: Numerical Simulation and Modeling} lectures by Professor Jaijeet Roychowdhury, Spring 2021}
+\author{Jay Monga}
+\date{Last updated \today}
+\maketitle
+
+\tableofcontents
+
+\chapter{Introduction}
+Website login info:
+\begin{itemize}
+    \item Username: 219Aspr2021
+    \item Password: Python0Julia1?
+\end{itemize}
+
+\section{Course Coverage}
+We will be covering
+\begin{itemize}
+    \item Models: Mainly circuits, but we will see how this applies to other case
+    \item System equations that arise from connections of modeled circuit components. DAEs will be looked at a lot, differential-algebraic equations
+    \item Biochemical reaction equations (we will see how this looks pretty close to circuits)
+    \item Analysis of noise in systems
+    \item Effects of parameter variability
+    \item Steady state analysis
+\end{itemize}
+We will have a more structured format then a standard electronics of ME course. In particular, we have two independent steps:
+\begin{itemize}
+    \item Modeling physical systems as nonlinear differential equations
+    \item Solving these differential equations numerically in different ways ("analyses")
+\end{itemize}
+The seperation of these two steps gives us a nicer view of the modeling process.
+\section{Why is Simulation Useful?}
+
+Motivating example - We might have a super complicated circuit with tons and tons of resistors and we want to determine some waveform with respect to some input. We may desire to do this analytically, but this may not always be feasible or possible. We may proceed by taking analytically simplifications, but this may also be hard and also lead us to oversimplify.\\
+
+Numerical simulations let us gain insights into a system that may be hard to analytically solve or simplify. We can experiment at will with numerical examples and gain an understanding of the system that may allow us to do well guided analytic simplifications. \\
+
+The study of modeling also provides some mathematical beauty and lets us identify connetions across many disciplines that may be otherwise hidden.
+
+\section{First Look at Modeling through Circuits}
+\subsection{Why Circuits First?}
+\begin{itemize}
+    \item It's an EE class
+    \item Historically, modeling/simulation is the most well developed in the world of circuit simulation
+    \begin{itemize}
+        \item Starting with SPICE tools introduced in 70's, created at Berkeley
+    \end{itemize}
+    \item Later adapted to other domains (biology, mechanics, etc.)
+    \begin{itemize}
+        \item Even use circuits to describe things that have nothing to do with circuits,since circuits provide a nice, precise way to specifiy differential equations
+    \end{itemize}
+\end{itemize}
+\subsection{EE Devices/Elements}
+\subsubsection{Two Terminal Devices}
+\begin{itemize}
+    \item Two sides labeled by $p$ and $n$, stands for positive and negative but that doesn't actually have to be what the potential on the respective ends are
+    \item Some voltage across across the device denoted by $V_{pn}$
+    \item Current through the device denoted by $\vec{i_{pn}}$
+    \item We have some equation for the relationship between voltage and current (typically voltage is the input) giving us a device model
+    \begin{itemize}
+        \item It's typically useful to plot out this relationship
+    \end{itemize}
+\end{itemize}
+Let's look at some specific devices. We will start with some idealized models.
+\begin{itemize}
+    \item Linear resistor, model given by Ohm's Law: $i = \frac{V}{R}$
+    \begin{itemize}
+        \item We can see it has a perfect linear $I-V$ relationship
+        \item The device is memoryless - current output at time $t$ only depends on values of voltage provided at time $t$
+    \end{itemize}
+    \item Linear capacitor, model given by $q = CV$
+    \begin{itemize}
+        \item We can take the derivative to get the $I-V$ relationship by taking the derivative of both sides to derive $i(t) = C \diff{V}{t}$
+        \item Most idealized case is just two electric plates seperated by some insulator
+        \item This device is not memoryless - the capacitor can be viewed as an integrator, which has some fundemental aspect of memory
+    \end{itemize}
+    \item Linear inductor, model given by $\phi = Li$
+    \begin{itemize}
+        \item We can take the derivative to get the $I-V$ relationship by taking the derivative of both sides to derive $V(t) = L \diff{i}{t}$
+        \item We can also view the inductor as the dual of a capacitor
+        \item Of course, this component will also not be memoryless - we can view it as a differentiator
+    \end{itemize}
+    \item Independent sources
+    \begin{itemize}
+        \item Can provide voltage and current
+        \item Either compleletely flat vertical (voltage source) or horizontal (current source) line
+        \begin{itemize}
+            \item Thus, the voltage source $I-V$ relationship cannot be expressed as a function of $V$
+        \end{itemize}
+    \end{itemize}
+    \item Linear dependent sources
+    \begin{itemize}
+        \item This is actually a 4 terminal device, but it is often abstracted to have two terminal
+        \item The device will act as voltage or current source, with supply equal to some multiple of an input voltage or current
+        \item Voltage or current through the device depends on load
+        \item As a guiding principal, $p$ known values are needed to completely specify $p$ inputs and outputs of a system.
+    \end{itemize}
+\end{itemize}
+Like previously stated, we covered idealized device models
+\begin{itemize}
+    \item Linear controlled sources are really unphysical
+    \item R, L, C, etc. parameters are idealized (may be temperature dependent, device limits)
+\end{itemize}
+The takeaway is that all models are wrong, but some are useful. It is imporant to be able to know to what extent a model creates some approximation, or else you will be in a pickle.
+
+\subsection{"System Properties" of Elements}
+\begin{definition}[Memoryless]
+    The output of a system at time $t$ is dependent only on the input at time $t$, not values of the input in the past or future.
+\end{definition}
+We will say that memoryless systems have outputs that are functions of the inputs (use $y(t) = f(x)$), or else the outputs are functionals of the inputs (use $y(t) = \chi \{x(t)\})$
+\begin{definition}[Scaling]
+    $x(t) \rightarrow y(t) \implies c \cdot x(t) \rightarrow c \cdot y(t)$
+\end{definition}
+\begin{definition}[Superpostion]
+    $x_1(t) \rightarrow y_1(t), x_2(t) \rightarrow y_2(t) \implies x_1(t) + x_2(t) \rightarrow y_1(t) + y_2(t)$
+\end{definition}
+\begin{definition}
+    A system is \textbf{linear} if it satisfies superpostion and scalaing.
+\end{definition}
+The quickest way to show linearity is to prove
+\begin{equation*}
+    x_1(t) \rightarrow y_1(t), x_2(t) \rightarrow y_2(t) \implies \alpha_1 \cdot x_1(t) + \alpha_2 \cdot x_2(t) \rightarrow \alpha_1 \cdot y_1(t) + \alpha_2 \cdot y_2(t)
+\end{equation*}
+\end{document}
