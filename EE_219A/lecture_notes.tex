@@ -186,6 +186,75 @@ and is parameterized by
 If we wanted to plot this $I-V$ curve, it would look like a common exponential. We idealize this diode by assuming that any negative current or very low is 0.
 % put in a plot of the curve
 
-We can see that at all points in the curve, $v \cdot i \geq 0$. This means that power is always being dissapted by our device, or alternatively, no power is being generated.
+We can see that at all points in the curve, $v \cdot i \geq 0$. This means that power is always being dissapted by our device, or alternatively, no power is being generated. It's a nice sanity check to see that this holds. For example. we can see that forgetting the $-1$ in our equation would make the negative $V$ region of our inputs generate power
+% add plot of this
+
+\subsection{Bipolar Junction Transistor (BJT) model: Ebers-Moll}
+We consider an NPN Transistor (NPN stands for some physical properties of the device). The device has three termianls B, C, E, which stands for base, collector, and emitter.
+
+% needs picture of device
+
+Before we get into the model, we consider the conservation equations for this device. We have KVL
+\begin{equation*}
+    V_{BE} + V{BC} - V_{CE} = 0 %  I think I got this wrong
+\end{equation*}
+and KCL
+\begin{equation*}
+    i_B + i_C + i_E = 0
+\end{equation*}
+
+We will figure out output current of this device with respect to the input, namly a relationship
+\begin{equation*}
+    \begin{bmatrix}
+        i_C \\
+        i_E
+    \end{bmatrix}
+    = \vec{f}
+    (\begin{bmatrix}
+        V_{BE} \\
+        V_{BC}
+    \end{bmatrix})
+\end{equation*}
+
+% need to put in simplified equivalent ciruit drawing of the device
+
+We can do KCL at each node to get some starting equations.
+
+\begin{description}
+    \item[Base Node] 
+    \begin{equation*}
+        i_B = (1 - \alpha_F)i_F + (1 - \alpha_R)i_R
+    \end{equation*}
+    \item[Collector Node] 
+    \begin{equation*}
+        i_C = \alpha_F i_F - i_R
+    \end{equation*}
+    Note we can get $i_F, i_R$ from our ideal diode equations.
+    \begin{align*}
+        i_F &= \mathrm{diode}(V_{BE}; I_{SF})
+        i_R &= \mathrm{diode}(V_{BC}; I_{SR})
+    \end{align*}
+
+    Now we can explicitly write out a vector system % I'm too lazy to do this rn
+    and make it like sort of linear by altering our input vector.
+\end{description}
+
+\subsubsection{Characteristic Curves}
+Similarly to how we used plots to analyze our diode model, we can inspect the Characteristic curves of our BJT to analyze its properties. The convention is to plot $i_C$ over $V_{CE}$ for various fixed values of $V_{BE}$. We call the reigion where $i_C$ increases the \textbf{saturation region} and when $i_C$ remains constant the \textbf{forward active region}.
+
+% put in characteristic curve plot
+
+\subsection{Metal Oxide Semiconductor Field-Effect Transistor (MOSFET)}
+\begin{itemize}
+    \item Just like the BJT transistor, the MOSFET has NPN \& PNP types as well
+    \item We will examine the Shichman-Hodges (great people who were at Bell Labs, Dave Hodges used to be at Berkeley) (S-H) model
+\end{itemize} 
+There are three terminals we look at, Gate (G), Drain (D), Source (S). As before, we can define voltages across these terminals and currents through them.
+% put in picture of this
+There are two cases we can consider when modeling this device. In the simple case when we have $i_G = 0$, we have
+\begin{equation*}
+    i_D = f_{N^+}() % finish this later
+\end{equation*}
+
 
 \end{document}

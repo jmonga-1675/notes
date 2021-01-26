@@ -162,6 +162,8 @@ The DTFT has a nice dual to the classical fourier series.
         % more algebra...
         \Aboxed{W(e^{j \omega}) &= \abs{\frac{}{}}}
         %Fix this - you get a periodic sinc
+        % because things in DTFT need to be periodic
+        % add a picture of the periodic sinc
     \end{align*}
 \end{example}
 \subsubsection{Properties}
@@ -181,6 +183,159 @@ The DTFT has a nice dual to the classical fourier series.
         \s{n}{-\infty}{\infty}{x[n] * y[n]} = \frac{1}{2 \pi} \I{\omega}{-\infty}{\infty}{X(e^{j \omega}) Y^*({e ^{- j \omega}})}
     \end{equation*}
     and then here is a form that shows how energy is preserved
+    % need to add this
     \item Shift property
 \end{itemize}
+
+\chapter{Transforms of Discrete Signals}
+\section{DTFT Continued}
+Refer above to more in depth of these DTFT properties
+\begin{itemize}
+    \item Analysis and synthesis equations
+    \item Relationship between DTFT and FFT
+    \item Window function and periodic sinc
+    \item Convolution in time is multiplication in frequency
+    \item Conjugate symmetry for real signals
+    \item Parseval's theorem tells us that energy is conserved (with a factor of ($2 \pi$)
+    \item Shift property
+\end{itemize}
+
+\begin{example}
+    Consider an ideal low pass filter box function from $-\omega_c$ to $\omega_c$. 
+    % put in math
+    We get
+    \begin{equation*}
+        h[n] = \frac{\omega_c}{\pi} \frac{sin(\omega_c n)}{\omega_c n}
+    \end{equation*}
+    Cool! Recall that we see the $\mathrm{sinc}$ function here.
+    \begin{equation*}
+        \mathrm{sinc}(x) = 
+        \begin{cases}
+            \frac{sin(x)}{x} & x \neq 0 \\
+            1 & x = 0 \\
+        \end{cases}
+    \end{equation*}
+    Actually not cool. Looking at the impulse response
+    % put plot of impulse response
+    We see there are two problems that make this ideal not realizable
+    \begin{itemize}
+        \item $h[n]$ is not causal
+        \item $h[n]$ is infinite
+    \end{itemize}
+    We can fix this by adding a delay to our impulse response and applying a windowing function. What would the effects on the frequency response? We can use the shift property to see what the delay does, but for the multiplication by the windowing function we derive a relationship between multiplication in time and convolution in frequency
+    %  add derivation
+    % continue discussion of effects, side lobes, gibs phehonoem, add picture
+\end{example}
+
+\section{Convergence}
+
+\begin{definition}
+    % If $\exists$ a continuous function of \omega, called $X(e^{j \omega})$ s.t. $\forall \epsilon > 0, \forall \omega, \exists n_0$ s.t. $\abs {\s{n}{-n_0}{n_0}{x[n] e^{-j \omega n} - X(e^j \omega n)}}$ % fix error here and complete definition
+\end{definition}
+
+This form of convergence might be too strict and will tell us that a lot of things don't converge. Thus, we must introuce MSE convergence.
+
+\begin{definition}
+    % Explain convergence in mean squared error
+\end{definition}
+
+\begin{theorem}
+    $\s{n}{- \infty}{\infty}{\abs{x[n]}} < \infty \implies X(e^{j \omega})$ converges uniformly
+\end{theorem}
+
+\begin{theorem}
+    $\s{n}{- \infty}{\infty}{\abs{x[n]}^2} < \infty \implies X(e^{j \omega})$ converges in MSE
+\end{theorem}
+
+\begin{example}
+    % Go through sinc function example
+    % It won't converge uniformly
+    % But it will converge MSE
+\end{example}
+
+\section{Z-Transform}
+Motvation:
+\begin{itemize}
+    \item DTFT doesn't always converge, so we need another tool in our toolbox
+    \item Solve difference equations
+    \item Can use it for the same analysis we were doing with the DTFT
+\end{itemize}
+
+Similarly to how $e^{j\omega n}$ behaves as an eigenfunction to LTI systems, we can see that the general exponential $z^n$ behaves the same way.
+% show eigenfunction property of z^n$
+The Z-transform of the impulse response gives us the transfer function of the system.
+% add picture, show relation to DTFT
+
+\subsection{Region of Convergence (ROC)}
+% Do the definition
+
+\begin{example}
+    Consider a right sided sequence $x[n] = a^n u[n]$. Consider its Z-transform
+    \begin{equation*}
+        X(z) = \s{n}{0}{\infty}a^n z^{-n} = \s{n}{0}{\infty}{(a z^{-1})^n}
+    \end{equation*}
+    Remembering what we know about geometric series, we see this converges to $X(z) = \frac{1}{1 - a z^{-1}}$ if $\abs{\frac{a}{z}} < 1$, or $\abs{a} < \abs{z}$.
+    % draw picture
+\end{example}
+
+\begin{example}
+    Consider the sum of two right sided sequences $x[n] = (\frac{1}{2})^n + (-\frac{1}{3})^n$. The DTFT of this signal should be
+    \begin{equation*}
+        X(z) = \frac{1}{1 - \frac{1}{2} z ^{-1}} + \frac{1}{1 + \frac{1}{3} z ^{-1}}
+    \end{equation*}
+    % Explain ROC as intersection of both ROC
+\end{example}
+
+\begin{example}
+    Consider left sided sequence $x[n] = -a^n u[-n - 1]$
+    % need to draw out this signal
+    % Do derivation for X(Z), find out its the same as right sided
+    % But the region of convergence is inverted
+    % Point is, inverse Z transform is can be ambiguous without ROC specified
+\end{example}
+
+\begin{example}
+    Consider a two-sided sequence $x[n] = -(\frac{1}{2})^n u[n] - (- \frac{1}{3})^n u[-n - 1]$
+    % show that ROC must be a ring
+\end{example}
+
+\begin{example}
+    Consider a two-sided sequence $x[n] = -(\frac{1}{2})^n u[n] - (- \frac{1}{3})^n u[-n - 1]$
+    % show that ROC must be a ring
+\end{example}
+
+% I missed two examples >:(
+
+\begin{example}
+    Consider the finite-length $M$ sequence $x[n] = a^n u[n] u[-n + M - 1]$
+    % show that, of course, this converges (excpet for \abs{z} = 0 I guess)
+\end{example}
+
+General properties to remember:
+\begin{itemize}
+    \item Generally, ROC will be a ring or disk in $Z$-plane centered at the origin
+    \item DTFT converges $\iff$ ROC includes unit circle
+    % I missed one
+    \item For right-sided sequences, ROC extends from outermost pole to infinity. See this in examples 1, 2.
+    % missed 2 more
+\end{itemize}
+
+Properties of DTFT seeem to also hold for Z transform
+\begin{itemize}
+    \item $x[n - n_d] \leftrightarrow z^{-n_d} X(z)$
+    \item $z_0^n x[n] \leftrightarrow X(\frac{z}{z_0})$
+    \item $nx[n] \leftrightarrow -z \diff{X(z)}{dz}$
+    % Missed other properties, put in derivations too
+\end{itemize}
+
+Rigorous inversion of $z$-transform relies contour integration within the ROC. We can avoid it by
+\begin{itemize}
+    \item Inspection, utilizing known transforms
+    \item Properties of the z-transform
+    \item Power series expansion
+    \item Parital fraction decomposition
+    \item Residue theorem (partial fraction decomposition)
+\end{itemize}
+%something about inverse of rational polynomials
+
 \end{document}

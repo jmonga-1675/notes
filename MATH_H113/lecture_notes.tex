@@ -144,4 +144,36 @@ With a notion of functions and their properties, we can start talking about set 
     A set $A$ is \textbf{finite} if there exists a bijection with 
 \end{definition}
 
+\chapter{Groups}
+
+\section{Binary Operations}
+% I missed some aside about cartesian products
+
+\begin{definition}
+    A \textbf{binary operation} on a set $S$ is a function
+    \begin{equation*}
+        f: S \times S \rightarrow S
+    \end{equation*}
+    We will denote $f(a, b)$ as $a * b$ when it is clear what $f$ is, or we are talking about some general $f$.
+\end{definition}
+
+\begin{definition}
+    $*$ is called \textbf{commutative} if $\forall a,b \in S, a * b = b* a$
+\end{definition}
+
+
+\begin{definition}
+    $*$ is called \textbf{associative} if \begin{equation*}
+        (a * b) * c = a * (b * c)
+    \end{equation*}
+\end{definition}
+
+\begin{remark}
+    If $*$ is associative, then $*$ defines an $n$-ary operation (function on $n$ ordered arguments).
+\end{remark}
+
+Binary operations in general are not commutative or associative, but we can see that they give rise to interesting structure if they do hold.
+
+
+
 \end{document}
