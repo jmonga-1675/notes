@@ -126,4 +126,40 @@ The quickest way to show linearity is to prove
 \begin{equation*}
     x_1(t) \rightarrow y_1(t), x_2(t) \rightarrow y_2(t) \implies \alpha_1 \cdot x_1(t) + \alpha_2 \cdot x_2(t) \rightarrow \alpha_1 \cdot y_1(t) + \alpha_2 \cdot y_2(t)
 \end{equation*}
+
+
+\chapter{Systems Continued}
+
+
+\section{Linearity}
+% Missed proof of linearity for capacitor
+% Missed proof of non-linearity for independent sources
+% Missed explanation of affine system (indepependent source)
+We concluded our discussion of linear systems for now and start getting into the interesting stuff.
+
+\section{Nonlinear Elements}
+\subsection{Nonlinear Resistors}
+% Example with i = tanh(kv)
+A nonlinear resistor might obey the $I-V$ relationship
+\begin{equation*}
+    i = f(v)
+\end{equation*}
+for some nonlinear function $f$.
+
+It's important for this function $f$ to be well defined, as in it has a defined output for every input over the domain of interest. For good simulation, we should want $f$ to be continuous and infinitely %?
+differentiable
+
+Whenever we can express $i = f(v)$, we say we have a \textbf{voltage-controlled} element. As you can imagine, the reverse relationship $v = g(i)$ describes as \textbf{current-controlled element}.
+
+Not all types of elements will be defined as voltage-controlled or current conrolled. We can sometimes have elements defined in an \textbf{implicit form} in which there may not exist a well-defined direct relationship between $v$ and $i$. For example, consider the (purely hypothetical) relationship
+\begin{equation*}
+    i^2 + v^2 = 1
+\end{equation*}
+The relationship gives us a lot of issues if we try to define this as something voltage-controlled and current-controlled, namely
+\begin{itemize}
+    \item For a given $v$ we cannot determined a unique $i$
+    \item For a given $i$ we cannot determine a unique $v$
+    \item There are values of $v$ and $i$ for which we do not have a defined output
+\end{itemize}
+
 \end{document}
