@@ -174,6 +174,87 @@ With a notion of functions and their properties, we can start talking about set 
 
 Binary operations in general are not commutative or associative, but we can see that they give rise to interesting structure if they do hold.
 
+% I missed some things Frenkel was saying about importance of associativity
+
+\begin{example}
+    Consider the binary operation of $+$ on $\mathbb{N}$. We can trivially see that
+    \begin{itemize}
+        \item $+$ is commutative
+        \item $+$ is associative
+    \end{itemize}
+\end{example}
+
+\begin{example}
+    Again consider $+$, but on $\mathbb{Z}^+$. We notice that the element $0$ has a special property
+    \begin{equation*}
+        \forall a \in \mathbb{Z}^+, a + 0 = 0 + a = a
+    \end{equation*}
+\end{example}
+
+\begin{definition}
+    An element $e$ of a set $S$ with a defined binary operation $*$ is called the \textbf{identity element} of $S$ if
+    \begin{equation*}
+        \forall a \in S, a * e = e * a = a
+    \end{equation*}
+\end{definition}
+
+\begin{lemma}
+    For binary structure $(S, *)$, an identity element in $S$, if it exists, must be unique.
+\end{lemma}
+
+\begin{proof}
+    Uniquness proofs often follow the structure of assuming two seperate entities exist, and then proving that they must be the same entity. In this case, we assume we have two elements $e, e'$ that satisfy the definition of identity element on binary structure $(S, *)$. 
+
+    Let's consider the value of $e * e$. using the identity property of $e$, we have \begin{equation*}
+        e * e' = e'
+    \end{equation*}
+    But using the identity property of $e'$, we must have
+    \begin{equation*}
+        e * e' = e
+    \end{equation*}
+    These two equalities give us $e = e'$.
+
+    We can put this proof in one cute line as well
+    \begin{equation*}
+        e' = e * e' = e
+    \end{equation*}
+    But be sure to explain your steps!
+    \qed
+\end{proof}
+
+\begin{example}
+    Consider the set of counterclockwise rotations by some angle $\varphi$.
+    % I missed something he was talking about
+    We define $+$ on this set as
+    \begin{equation*}
+        x + y \, \bmod 2 \pi
+    \end{equation*}
+\end{example}
+
+\begin{example}
+    On $\mathbb{Z}, \mathbb{Q}, \mathbb{R}$ consider the $+$ operation with a special rule: for $C \in \mathbb{R}^+$, $x + y$ will take on the value of its remainder when divided by $C$. This is called addition modulo $C$. We can say $x \equiv y \, \bmod C$ if $\exists n \in \mathbb{Z}$ s.t. $x = y + n C$
+\end{example}
+
+% definition of equivalence relation, explain how mod is one
+% I missed some things about partitions, equivalence classes, and residue classes
+With our equivalence class established, we can say that
+\begin{equation*}
+    \tilde{x} \sim x', \tilde{y} \sim y' \implies \tilde{x} * \tilde{y} \sim x' + y'
+\end{equation*}
+% need to clarify if this is just for mod or in general
+
+\begin{example}
+    Consider the set of rotations of a sphere (known as $SO(3)$). We can consider each element of this set as a point on the sphere. In general, the operation of composing two rotations will not be commutative, but associative. This binary operation will also have an identity element.
+\end{example}
+
+\begin{example}
+    We will show that complex numbers give us an alternate, but equivalent, description of the symmetries of a circle. Recall the standard definitions of addition and multiplication for complex numbers. 
+    % Define addition and multiplication for complex numbers
+
+    \begin{remark}
+        $\mathbb{N}, \mathbb{Z}^+, \mathbb{Z}, \mathbb{Q}, \mathbb{R}$ have 2 natural operations: $+$ and $\cdot$
+    \end{remark}
+\end{example}
 
 
 \end{document}
