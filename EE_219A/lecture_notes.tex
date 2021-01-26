@@ -161,5 +161,31 @@ The relationship gives us a lot of issues if we try to define this as something 
     \item For a given $i$ we cannot determine a unique $v$
     \item There are values of $v$ and $i$ for which we do not have a defined output
 \end{itemize}
+Although this was just a toy example, we see real world examples in nonlinear elements
+
+Why is this important? The major reason is that this all determines how we write our circuit equations. It can impact solving methods (we can solve voltage controlled sources with nodal analysis) and number of solutions as well.
+
+\subsection{Ideal Diode Model}
+% Put in a picture of the diode
+The ideal diode model has the $I-V$ relationship
+\begin{equation*}
+    i_d = I_s (e^{\frac{V}{V_t}} - 1)
+\end{equation*}
+and is parameterized by
+\begin{itemize}
+    \item $I_s$, the saturation current $(A)$. Typically takes on values between $10^{-8}$ (breadboard) to $10^{-12}$ chip
+    \item $V_t$, thermal voltage with equation \begin{equation*}
+        \frac{kT}{q}
+    \end{equation*}
+    itself with parameters \begin{itemize}
+        \item $k$, Boltzman constant % Jaijeet didn't remember this
+        \item $q$, unit electric charge % missed this
+        \item $T$, absolute temperature in Kelvin
+    \end{itemize}
+\end{itemize}
+If we wanted to plot this $I-V$ curve, it would look like a common exponential. We idealize this diode by assuming that any negative current or very low is 0.
+% put in a plot of the curve
+
+We can see that at all points in the curve, $v \cdot i \geq 0$. This means that power is always being dissapted by our device, or alternatively, no power is being generated.
 
 \end{document}
