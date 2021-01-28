@@ -256,5 +256,104 @@ With our equivalence class established, we can say that
     \end{remark}
 \end{example}
 
+\chapter{Groups cont.}
+\section{Complex Numbers}
+% Lol you might want to rewatch this part of lecture
+\begin{itemize}
+    \item Complex numbers are commutative group under multiplication and addition
+    \begin{itemize}
+        \item This property is sort of unique to groups isomorphic to $\mathbb{R}^2$
+    \end{itemize}
+    \item When restricted to unit circle, group of complex numbers under multiplication isomorphic to residue classes of $\mathbb{Z}$ modulo $2 \pi$
+    \begin{itemize}
+        \item Eulers formula
+        \begin{itemize}
+            \item Algebra vs analysis discussion
+            \item Taylor series derivation
+            \item Another proof I missed I think
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+\section{Formalized Groups}
+\begin{definition}
+    % Clean this up to use correct group axioms
+    A \textbf{group} is a set $S$ with an associative binary operation $*$ such that
+        \begin{description}
+            \item[(Closed under $*$)] $*: S \times S \rightarrow S$
+            \item[(Identity element)] $\exists e \in S$ s.t. $\forall x \in S,\, e * x = x * e = x$
+            \item[(Inverse element)] $\forall x \in S, \, \exists x' \in S$ s.t. $x * x' = x' * x = e$
+        \end{description}
+\end{definition}
+% Frenkel gave some examples that I missed
+
+\begin{example}
+    Consider $M_{n \times n}$, the set of all $n \times n$ matrices with entires in $\mathbb{R}$. Is this a group under the binary operation of matrix multiplication?
+    \begin{itemize}
+        \item Axiom 1 holds since an $n \times n$ matrix times an $n \times n$ matrix
+    \end{itemize}
+
+    However, consider
+    \begin{equation*}
+        GL_n\{\mathbb{R}\} = \{A \in M_{n \times n}(\mathbb{R}) \,|\, \det A \neq 0\}
+    \end{equation*}
+    which is the set of all invertible $n \times n$ matrices. This set will form a group.
+\end{example}
+
+It's now time to define the notion of a subgroup
+
+\begin{definition}
+    A \textbf{subgroup} of a group $G$ is a subset of $G$ that also forms a group
+\end{definition}
+
+\begin{remark}
+    It's not enough for a subset of $G$ to be closed under $*$ to be considered a subgroup, we need to check the other properties too. Conside $\mathbb{Z}^+$
+    % finish this discussion
+\end{remark}
+
+% Investigate upper-half plane of complex numbers
+% Frenkel goes through some weird group SL_2 (R) under this mobius transformation thing
+% and then apparently SL_2(Z) is an interesting subgroup of that
+% Also look up modular group, modular forms
+
+\begin{definition}
+    A \textbf{homomorphism} $h: G^{*_G} \rightarrow H^{*_H}$ is a function between two sets such that
+    \begin{equation*}
+        h(g_1 *_G g_2) - h(g_1) *_H h(g_2)
+    \end{equation*}
+\end{definition}
+
+\begin{example}
+    We just talked about a homomorphism from $G = SL_2 (\mathbb{R})$ to $H_+$ (upper half plane of complex numbers)
+\end{example}
+
+\subsection{Important Results}
+Assume we have some group structure $(G, *)$
+\begin{theorem}
+    \begin{equation*}
+        a * b = a * c \implies b = c
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    We are guarenteed to have an inverse for $a$
+\end{proof}
+
+\begin{theorem}
+    The equation
+    \begin{equation*}
+        a * x = b
+    \end{equation*}
+    has a unique solution
+    \begin{equation*}
+        x  = a' * b
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    % standard uniquess of solution proof
+\end{proof}
+% \begin{corollary}
+%     $\forall a \in G, a'$ is unique
+% \end{corollary}
+% need to finish this 
 
 \end{document}

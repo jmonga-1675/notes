@@ -338,4 +338,144 @@ Rigorous inversion of $z$-transform relies contour integration within the ROC. W
 \end{itemize}
 %something about inverse of rational polynomials
 
+\chapter{Z-Transform and DFT}
+Readings: Chapter 3 and 8
+
+\section{Z-Transform Recap}
+
+\subsection{Properties}
+Recall the bi-lateral z-transform
+\begin{equation*}
+    X(z) = \s{n}{\infty}{\infty}{x[n]z^{-n}}, z \in \mathrm{R.O.C}(x)
+\end{equation*}
+
+The ROC will take the shape of a ring
+
+\begin{align*}
+    X(z)
+    &= \s{n}{-\infty}{-1}{x[n]z^[-n]} & \; \text{region of convergence} \abs{z} < \abs{a} \\
+    &= + \s{n}{0}{\infty}{x[n]z^[-n]} & \text{region of convergence} \; \abs{z} > \abs{a} \\
+\end{align*}
+
+Other notes
+
+% fill these in
+\begin{itemize}
+    \item ROC and inverse $Z$-transform
+    \item Linearity
+    \item Pole-zero cancelation
+    \item Convolution
+\end{itemize}
+Read the book for more detail
+
+\begin{example}[Transfor function $H(z)$ of a DT system]
+    % Need to add picture
+    % show how to get transfer function
+    % solve for transfer function
+    % solve for h[n]
+\end{example}
+
+\subsection{Inversion of Z-Transform}
+There is an inverse formula, but you need complex analysis to understand it. Instead, we proceed by
+
+% need to fill out these things
+\begin{itemize}
+    \item Inspection
+    % Right-sided exponential
+    \item Properties of $Z$-transform
+    \begin{itemize}
+        \item Delays
+        % Delayed exponential
+        % Sum of delays (power series)
+        % Exercise: Find inverse z of log(1 + az^-1)
+    \end{itemize}
+    \item Partial Fraction Decomposition (PFE)
+    % put down the example he used
+    % lol you need to relearn this
+\end{itemize}
+
+\begin{theorem}
+    If $H(z)$ is a rational transfer function,
+    \begin{equation*}
+        \text{BIBO stability } \iff \text{ ROC includes unit circle}
+    \end{equation*}
+    \begin{proof}
+        \begin{description}
+            \item[If]
+        % Trivial, fill it out later
+            \item[Only If] 
+        BIBO stable means that $h[n]$ is absolutely summable, so the $DTFT$ exists. Thus, $Z$-transform will include unit circle
+        \end{description}
+    \end{proof}
+\end{theorem}
+
+% need to do corollary connection between stability and poles
+
+\section{Discrete Fourier Transform (DFT)}
+\subsection{Motivaton}
+
+\begin{itemize}
+    \item DTFT is nice, we have good continuous figure of the frequency spectrum
+
+    \item But not good to do on a computer
+    \begin{itemize}
+        \item Infinite sum!
+        \item Continuous signal!
+    \end{itemize}
+    % missed more things here...
+
+    \item Efficient to do on a computer!
+    \begin{itemize}
+        \item Direct evaluation is $O(N^2)$
+        \item FFT is $O(N \log N)$
+        \item FFTW library
+        \item Use it to do convolution!
+        \begin{itemize}
+            \item Direct convolution is $O(N^2)$
+            \item FFT-based convolution is $O(N \log N)$
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+\subsection{Explanation}
+Assume we have the DFT definition
+
+\begin{equation*}
+    X[k] = \s{n}{0}{N-1}{x[n]e^{-j \frac{2 \pi}{N} n k}}
+\end{equation*}
+This looks similar to the DTFT! In fact
+
+% probably want to give proof for this
+\begin{equation*}
+    X[k] = \eval{X(e^{j \omega})}{\omega = \frac{2 \pi}{N} k}{}
+\end{equation*}
+We can see prove that the DFT is inherrently periodic
+\begin{align*}
+    X[k + rN] 
+    &= \s{n}{0}{N-1}{e^{-j \frac{2 \pi}{N} (k + rN)}} \\
+    &= X[k] \cdot e^{-j \frac{2 \pi}{N} rN} \\
+    &= X[k]
+\end{align*}
+
+\subsection{Inverse}
+We will start with a formula for the DFT inverse
+\begin{equation*}
+    x[n] = \frac{1}{N} \s{k}{0}{N - 1}{X[k] e^{j \frac{2 \pi}{N} nk}}
+\end{equation*}
+and prove that it works
+\begin{proof}
+    \begin{align*}
+        \frac{1}{N} \s{k}{0}{N - 1}{X[k] e^{j \frac{2 \pi}{N} nk}}
+        &= \frac{1}{N} \s{k}{0}{N - 1}{\s{n}{0}{N - 1}{x[n] e^{-j \frac{2 \pi}{N}n k}} e^{j \frac{2 \pi}{N} nk}} \\
+        &= \frac{1}{N} \s{n}{0}{N - 1}{x[n] \s{k}{0}{N - 1}{e^{-j \frac{2 \pi}{N}n k}} e^{j \frac{2 \pi}{N} nk}} \\
+    \end{align*}
+\end{proof}
+%This needs to be cleaned up
+To simplify things, we will define
+\begin{equation*}
+    W_n = e^{-j \frac{2\pi}{N}}
+\end{equation*}
+% Rewrite formula with W_N notation
+% Explan synthesis and analysis
+% Explain invertible transformation between signal and DFT
 \end{document}

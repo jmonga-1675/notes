@@ -383,4 +383,46 @@ Let's introduce some nonlinear relationships
 \section{Continuity, Derivatives, Smoothness}
 % Include image of evaluating a derivative on an I-V curve at some voltage V*
 
+% I may have missed Jaijeet explaining some terms
+
+\begin{definition}
+    A function is \textbf{smooth} when it and \textbf{all} it's derivatives (higher-order \& mixed) exist \& are well-defined
+\end{definition}
+
+% put in delta-epsilon definition of continuity
+
+% put in examples of smooth, non-smooth functions
+
+Why is this importance?
+\begin{itemize}
+    \item Numerical algorithms (ie. Newton-Raphson) use functions/derivatives
+    \begin{itemize}
+        \item N-R convergence is sensitive to derivatives
+        \begin{itemize}
+            \item non-smoothness breaks theoretical (and in practice) assurance of N-R convergence
+        \end{itemize}
+    \end{itemize}
+    \item Physical systems typically smooth at fine enough resolution
+    \begin{itemize}
+        \item Non-smoothness indicative of unphysical model (take this with a grain of ault, just a sanity check)
+        \begin{itemize}
+            \item Incorrect modeling of underlying physics/math
+            \begin{itemize}
+                \item ex. Modeling a real device by giving it discrete properties
+                \item Should be a continuous model, no diff eqs
+                \item Careful with finite-state machines
+            \end{itemize}
+        \end{itemize}
+    \end{itemize}
+    \item Derivatives often have important physical connotations
+    \begin{itemize}
+        \item Ex. give us some idea about resistance of the device
+    \end{itemize}
+    \item 2\ts{nd} derivatives (Hessians) help us do optimization
+    \item higher order derivatives can be important in some modeling situations
+    \begin{itemize}
+        \item distortion and intermodulation effects
+    \end{itemize}
+\end{itemize}
+
 \end{document}
