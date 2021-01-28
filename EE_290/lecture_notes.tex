@@ -98,5 +98,176 @@ However, it may better to utilize visual landmarks rather doing full scene recon
 
 Vision can help us learn from actions and develop a environment model and policy. We also want to incorporate perception in the control loop (Prof. Tomlin's work).
 
+\chapter{Learning and Vision}
+
+
+\section{3D Perception by Humans}
+
+Humans rely on many visual cues that provide information about the environment
+
+% Need to explain what these are
+\begin{itemize}
+    \item Accomodation
+    \begin{itemize}
+        \item Change eye focal length
+    \end{itemize}
+    \item Convergence
+    \item Convergence angle vs distance
+    \item Motion (optical flow)
+    \begin{itemize}
+        \item Estimate derivative
+        \item Most important signal for depth
+        \item Can use it to segment occluded objects
+    \end{itemize}
+    \item Binocular Stereopsis
+    \begin{itemize}
+        \item Stereo vision with our eyes
+    \end{itemize}
+    \item Pictorial Cues
+    \begin{itemize}
+        \item We can percieve surface normals, not just depth, through a combination of various pictoral cues
+    \end{itemize}
+    \item Curvilinear Grouping
+    \begin{itemize}
+        \item We can assume depth order since boundaries are smooth in nature
+        % Add the pictures
+    \end{itemize}
+    % Jitendra skipped a lot
+    \item Texture gradients
+    \begin{itemize}
+        \item Different objects appear different in different distances; surface normals get modified
+    \end{itemize}
+    \item Shading
+    \begin{itemize}
+        \item Changes in shade can make us percieve depth
+        % Jitendra had some cool work here
+    \end{itemize}
+    % and more...
+\end{itemize}
+
+    The main point is that we can't effectively use these features by default; we need to learn how to do so.
+
+    % Lol I missed the name of this section
+    \section{}
+    Jitendra likes to emphasize the 3 R's of Vision
+    \begin{itemize}
+        \item Recognition
+        \begin{itemize}
+            \item Classification and categorization of objects in the scene
+            \item Determining properties of objects as well (density, best grasping points)
+        \end{itemize}
+        \item Reorganization
+        \begin{itemize}
+            \item Making sense of the objects we know are there % I think? I kind of missed this part
+        \end{itemize}
+        \item Reconstruction
+        \begin{itemize}
+            \item Recovering 3D scene from image
+            \item The inverse graphics problem (not just depth!)
+        \end{itemize}
+    \end{itemize}
+    People used to view all these We should view these three processes as interacting and each having their own feedback loops.
+
+    Deep learning has done a lot of nice work connecting recognition and reorganization
+    \begin{itemize}
+        \item Determine bounding box, mask, and label
+        % The one paper he used pictures from
+    \end{itemize}
+
+    Where do we go from here? 3D reconstruction still needs a lot of work.
+
+    \begin{itemize}
+        \item Classical work in 3D vision has given us some nice reconstruction
+        % Explain these things
+        \begin{itemize}
+            \item Blocks world
+            \item Morphable models
+            \item Shape from shading
+            \item Structure from motion
+        \end{itemize}
+        \item Now deep learning gives us some nice things
+        \begin{itemize}
+            \item Mesh R-CNN by Jitendra's gropu
+            \begin{itemize}
+                \item Detect object
+                \item Guess voxels
+            \end{itemize}
+        \end{itemize}
+    \end{itemize}
+
+    "Vision can be solved because we do it all the time" - Jitendra
+
+    \section{Robotics and Vision}
+
+    "Robotics is the killer app for vision" - Yi
+
+    \begin{itemize}
+        \item Yi's first project as a PhD student was for self-driving
+        \item In his MASKS book, talks about vision for cars and helicopters
+        \item Need to make vision computational and mathematical
+    \end{itemize}
+
+    We will kind of be summarizing the MASKS book
+
+    % Put these in seperate subsections
+    \begin{itemize}
+        \item Images and geometry
+        \begin{itemize}
+            \item First computer vision pepople were artists
+            \item Perspective projection ideas
+            \item A lot happened within the turn of the last century!
+            \item Ma comes in to help give unifying mathematical perspectie
+            \item Now we think about not using so many views, because even a single image gives us a lot of information
+        \end{itemize}
+        \item Geometry for multiple images
+        % Probably want to add actual equations
+        \begin{itemize}
+            \item "hat" matrix for cross product
+            \item Homogenous coordinates
+            \item Perspective projection equation
+            \item Homogenous representation of 3D line
+            \item Projection of line onto image is intersection of triangle plane and image plane
+            \item Specify plane with normal
+            \item Incidence relation from multiple cameras is the sufficient and necessary constraint for 3D reconstruction
+            \item We can construct matrices whose rank gives us our ability to reconstruct
+            \item Special case when points lie on the same plane
+            \item Iterated solving of depth and perspective
+        \end{itemize}
+        \item Geometry for single images
+        \begin{itemize}
+            \item Utilize symmetry in scene
+            \item Windows, walls, edges are straight/orthogonal features
+            \item Symmetry lets us infer the scene at multiple views
+            \item Group defintion of symmetric scene % I missed this
+            \item Let's us build prceise geometry from few images
+        \end{itemize}
+    \end{itemize}
+
+    We kind of assumed that feature matching or initial views was given - this is where the other R's come in
+
+    % Learning paper, i forgot the name that Yi put out
+    \begin{itemize}
+        \item Traditional 3D reconstruction bypasses reconstruction problem
+        \begin{itemize}
+            \item Suffer from lack of features
+            \item textureless objects
+            \item reflection
+            \item representation patterns (fence)
+            \item medium/large baseline
+            \item moving objects
+        \end{itemize}
+        \item Deep learning seems to work work well for reconstruction tasks but...
+        \item they are really only doing classification instead of reconstruction, not actually doing a great job
+        \item Problem: we aren't utilizing priors about structure in a scene
+        \item We actually don't care about depth of reconstructing every point in the image
+        \item This can make the problem well defined
+        \item Get wireframe from single image - this gives us good structure of the scene because we used priors and didn't try to get everything
+        \item Learning helps us go from canny edge to wireframe
+        \item Learning to find vanishing points
+        % Rely on video for the rest, i'm getting tired
+        \item Train netural network to identify plane of symmetry and use that to get correspondances
+        \item Datasets are super important for AI projects, but it's kind of lacking for 3D scene
+        \item HoliCity project
+    \end{itemize}
 
 \end{document}

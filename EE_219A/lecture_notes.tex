@@ -256,5 +256,131 @@ There are two cases we can consider when modeling this device. In the simple cas
     i_D = f_{N^+}() % finish this later
 \end{equation*}
 
+\chapter{Non-linear Devices Continued}
+\section{Shichman-Hodges Model}
+% Need to put in drawing of this device, NPN transistor, label terminals, currents, voltages
+\begin{align*}
+    i_G &= 0 \\
+    i_D &= f_{Nt} (V_{GS}, V_{DS}) = 
+    \begin{cases}
+        0 & V_{GS} < V_T \text{ (OFF)}\\ 
+        \frac{\beta}{2} (V_{GS} - V_T)^2 & V_R \leq V_{GS} < V_{DS} + V_T \text{ (Active/Saturation Region)}\\
+        \beta [(V_{GS} - V_T) - \frac{V_{DS}}{2}]V_{DS} & V_{GS} \geq V_{DS} + V_T \text{ (Triode/"Linear" Region)}
+    \end{cases}
+\end{align*}
+% Put in Jaijeet's physics drawing
+Intuition: As voltage increases, we get more excess electrons which make the device behave more like a resistor. Need in depth physics knowledge to go farther from here.
+
+($\beta$ is typically some constant near $10^{-2}$)
+
+It may be helpful to write things in terms of $V_{GS} - V_T$.
+
+% Put in labeled drawing of characteristic curves
+On the characteristic curves, we hold $V_{GS}$ over a varying $V_{DS}$.
+
+If we reverse the doping (PNP type) the device behaves in an inverse manner: We will be repelling electrons and creating holes.
+
+With $V_{DS} < 0$, $S$ and $D$ will swap. We can label them $D', S'$ now
+
+% show original transistor and draw on swapped labels. Also draw box with original and swapped labels, and label currents as well
+
+\begin{align*}
+    i_D 
+    &= - i_D' \\
+    &= - f_{N+}(V_{GS'}, V_{D'S'}) \\
+    &= - f_{N+}(V_{GS} - V_{DS}, -V_{DS}) \\
+    &= f_{N-}(V_{GS}, V_{DS})
+\end{align*}
+
+And we can create an abstraction now
+
+\begin{equation*}
+    i_D = 
+    \begin{cases}
+        f_{N+}(V_{GS}, V_{DS}) & V_{DS} \geq 0 \\
+        f_{N-}(V_{GS}, V_{DS}) & V_{DS} < 0 \\
+    \end{cases}
+\end{equation*}
+% Wait I think you should check if the case conditions are correct
+
+What changes for the PNP case?
+\begin{itemize}
+    \item $V_{GS}$ replaced by $- V_{GS}$, $V_{DS}$ replaced by $- V_{DS}$ for putting in $f_N(\cdot, \cdot)$
+    \item Output from $f(\cdot, \cdot)$ actually gives $i_S = - i_D$
+\end{itemize}
+
+Our current equation is then
+\begin{equation*}
+    i_D = f_P(V_{GS}, V_{DS}) = - f_N (-V_{GS}, -V_{DS})
+\end{equation*}
+
+\subsection{Recap}
+
+\begin{itemize}
+    \item Schichman-Hodes is a basic, 2 parameter model
+    \item This rocked in the old days, but we can do much better now
+    \item Modern models are much more complicated to complement their robustness
+\end{itemize}
+
+\section{Actual Device Models}
+% Give an idea of what the code is
+% Maybe some screenshots or pastings
+
+Main takeaways:
+\begin{itemize}
+    \item A HUGE number of parameters. Hundreds of them! (about 400)
+    \item Many many lines of code
+    \item This isn't even the most modern model!
+\end{itemize}
+
+\section{Non-linear Capacitors \& Inductors}
+\subsection{Non-linear Capacitor}
+Recall the linear capacitor equation
+\begin{equation*}
+    q = Cv \land i = \diff{q}{t} \implies i = c \diff{v}{t}
+\end{equation*}
+Let's introduce some nonlinear relationships
+\begin{description}
+    \item[Voltage-controlled nonlinear capacitor] 
+\begin{equation*}
+    q = f(v) \and i = \diff{q}{t}  \implies i = f'(v) \diff{v}{t}
+\end{equation*}
+    \item[Charge-controlled capacitor]
+    \begin{equation*}
+        V = g(q)
+    \end{equation*}
+    \item[Implicit capacitor]
+    \begin{equation*}
+        h(v, q) = 0
+    \end{equation*}
+\end{description}
+\subsection{Non-linear Inductor}
+\begin{description}
+    \item[]
+    % I missed all of these ...
+\end{description}
+
+\begin{example}[Depletion Capacitance]
+    % Picture of circuit
+    \begin{equation*}
+        Q_{\mathrm{depl}}(v) = 
+        \begin{cases}
+            A C_{JO} \frac{\phi}{1 - m}(1 - (1 - \frac{n}{\phi})^{1 - m}) & v \leq \int_c \phi \\
+            \text{complicated expression} & \text{otherwise}
+        \end{cases}
+        % Check that you got this down correctly
+    \end{equation*}
+    Check out all the parameters!
+
+    % Put in plot
+\end{example}
+
+\begin{example}[Non-linear Inductor]
+    % Put in picture of plot
+    Here we can see a piecewise-linear interpolation which forms a model of a transformer magnetizing curve.
+\end{example}
+
+\section{Continuity, Derivatives, Smoothness}
+% Include image of evaluating a derivative on an I-V curve at some voltage V*
 
 \end{document}
