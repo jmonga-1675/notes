@@ -425,4 +425,157 @@ Why is this importance?
     \end{itemize}
 \end{itemize}
 
+\chapter{Continuity and Smoothness}
+%idk what we are doing im 10 min late
+
+\section{Ill-defined Models}
+\begin{itemize}
+    \item Many device models will have discontinuity/domain problems
+    \item Could be because model writers are disocnnected from effect of poor model
+\end{itemize}
+
+\begin{example}[Diode Depletion Cap Expression]
+    \begin{equation*}
+        q_f(v) = -q N_a x_{po}\sqrt{1 - v/\psi_B}
+    \end{equation*}
+\end{example}
+For $v > \psi_B$, we could have problems since the range becomes complex.
+
+\begin{example}
+    \begin{equation*}
+        \mathrm{diode}(v; I_s, v_t) = I_s(e^{\frac{v}{v_t}} - 1)
+    \end{equation*}
+    The ideal diode model is well-defined over all $v \in \mathbb{R}$. By extension, the BJT model is also well-defineded since it is composed of the ideal diode and linear elements. But not all is well for numerical simulation, since 
+\end{example}
+
+\begin{example}[N-type MOSFET]
+    % include in model equation cases
+
+    % actually do these computations
+    Need to check
+    \begin{description}
+        \item[Continuity: ] 
+        Check limits at boundaries
+    \end{description}
+        \item[First Derivatives: ] Check that first derivatives with respect to each argument are the same from each direction at the boundaries
+        \item[Second Derivatives: ]
+        In this case, there are going to be three terms
+\end{example}
+
+\section{Problematic Primatives}
+
+\begin{example}
+    \begin{equation*}
+        % Need to give a plot
+        i = 
+        \begin{cases}
+            f_1(v) & v < a \\
+            f_2(v) & v \geq a \\
+        \end{cases}
+    \end{equation*}
+    % explain drawbacks of polynomial interpolation
+    % drawbacks of spline interpolation
+    % upper lower limits, computation, not continuous at every derivative
+    One thing we can do is rewrite $i$ using step functions
+    % draw out the unit step function
+    \begin{equation*}
+        i = u(v - a) f_1(v) + (1 - u(v -a)) f_2(v)
+    \end{equation*}
+    and then replace the step function with a smooth function that approaches 0 at $-\infty$ and 1 at $\infty$. A good choice could be activation functions used in neural networks.
+    \begin{equation*}
+        u(v) = \frac{1 + \tanh k v}{2}
+    \end{equation*}
+    where $k$ could represent a "sharpness" parameter. There are tradeoffs with $k$, and Jaijeet says you have to "finess" it.
+\end{example}
+
+The above is an example of discontinuity at the step function primative. We will go through more examples
+
+\begin{example}
+    % show picture of abs function
+    We can smooth the $\mathrm{abs}$ function by providing the a smooth version $\mathrm{sabs}$
+    \begin{equation*}
+        \mathrm{sabs}(x, \epsilon) = \sqrt[+]{x^2 + \epsilon^2}
+    \end{equation*}
+    % plot smooth function
+\end{example}
+
+\begin{example}
+    Similarly, we can smooth the clip function
+    \begin{equation*}
+        \mathrm{clip}(v) = \begin{cases}
+            0 & v < 0 \\
+            v & v \geq 0
+        \end{cases}
+    \end{equation*}
+    using our previous smooth function
+    \begin{equation*}
+        \mathrm{sclip}(v, \epsilon) =
+            \frac{v + \mathrm{sabs}(v, \epsilon)}{2}
+    \end{equation*}
+\end{example}
+
+% Explain Jaijeet's physics thing, you want to check the physics out too to see why these problems are here in the first place
+We can also use our primatives to fix domain issues
+\begin{example}
+    \begin{equation*}
+        \sqrt{v} \rightarrow \sqrt{\mathrm{sclip}(v)}
+    \end{equation*}
+\end{example}
+
+\begin{example}
+    \begin{equation*}
+        \log (x) \rightarrow \log (\mathrm{sclip}(v))
+    \end{equation*}
+\end{example}
+
+
+%Wait what function is this lol
+\begin{example}
+    \begin{equation*}
+        \frac{1}{x - a} \rightarrow ?
+    \end{equation*}
+\end{example}
+
+\section{Quanization Issues}
+First, we must explain double precision
+\begin{itemize}
+    \item We have 64 bits to work with
+    \item First bit represents sign of a number
+    \item Next 11 bits represent exponent
+    \item Next 53 bits are mantissa
+    \item Coming together, we have
+    \begin{equation*}
+        (-1)^{\text{sign bit}} \cdot 2^{\text{exponent bits}} \cdot 1.\text{mantissa bits}
+    \end{equation*}
+\end{itemize}
+We normally work with numbers stored in the double precision format. This format has a maxinum number size, after which we hit the numbers representation of infinity. 
+% Put in the largest number
+The limit on infinity seems very large, but we can see that it is pretty easy to reach.
+\begin{example}
+    % The diode at 20V
+\end{example}
+We also see a loss of precision when performing operations on very large numbers
+\begin{example}
+    %diode(v) - diode(v) + 1 example
+\end{example}
+
+\section{Memristors}
+% Diagram, relationships between charge, voltage, current, flux and capacitor, resistor, inductor
+% d/dt arrows
+
+\begin{itemize}
+    \item Postulated relationship between charge and flux, called element memristor
+    \begin{itemize}
+        \item Someone did their PhD on this
+    \end{itemize}
+    \item 2008: Stan Williams claimed to have found one
+    \begin{itemize}
+        \item Some really grand claims about applications to computers and devices contribute to hype
+        \item Apparently a lot of things behave as memristors when approximated, so everyone was saying they found one
+    \end{itemize}
+    \item Fundamentally nonlinear
+    % I missed an equation here
+\end{itemize}
+
+
 \end{document}
